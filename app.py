@@ -7,17 +7,12 @@ import google.generativeai as genai
 import time
 import re
 
-#temperature_value = 0
-#humidity_value = 0      
-#ultrasonik_value = 0
-#ldr_value = 0
-
 URL_temperature = "https://industrial.ubidots.com/api/v1.6/devices/esp32/suhu/lv"
 URL_humidity = "https://industrial.ubidots.com/api/v1.6/devices/esp32/kelembaban/lv"
 URL_ultrasonik = "https://industrial.ubidots.com/api/v1.6/devices/esp32/ultrasonik/lv"
 URL_ldr = "https://industrial.ubidots.com/api/v1.6/devices/esp32/ldr/lv"
-
 headers = {"X-Auth-Token": "BBUS-1VLDcPJ8z9MPntKtXWcPlZJVVo4r7d"}
+proses()
 
 # ========== KONFIGURASI ==========
 st.set_page_config(
