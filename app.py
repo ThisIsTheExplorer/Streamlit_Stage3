@@ -12,6 +12,23 @@ URL_humidity = "https://industrial.ubidots.com/api/v1.6/devices/esp32/kelembaban
 URL_ultrasonik = "https://industrial.ubidots.com/api/v1.6/devices/esp32/ultrasonik/lv"
 URL_ldr = "https://industrial.ubidots.com/api/v1.6/devices/esp32/ldr/lv"
 headers = {"X-Auth-Token": "BBUS-1VLDcPJ8z9MPntKtXWcPlZJVVo4r7d"}
+
+def proses():
+    response_temperature = requests.get(URL_temperature,headers=headers)
+    response_humidity = requests.get(URL_humidity,headers=headers)
+    response_ultrasonik = requests.get(URL_ultrasonik,headers=headers)
+    response_ldr = requests.get(URL_ldr,headers=headers)
+
+    temperature_value = float(response_temperature.text)
+    humidity_value = response_humidity.text
+    ultrasonik_value = float(response_ultrasonik.text)
+    ldr_value = response_ldr.text    
+
+    st.session_state.temperature = temperature_value
+    st.session_state.humidity = humidity_value   
+    st.session_state.ultrasonik = ultrasonik_value  
+    st.session_state.ldr = ldr_value
+    
 proses()
 
 # ========== KONFIGURASI ==========
