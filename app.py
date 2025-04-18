@@ -3,7 +3,6 @@ import streamlit as st
 import requests
 import pandas as pd
 import time
-import google.generativeai as genai
 import re
 
 temperature_value = 0
