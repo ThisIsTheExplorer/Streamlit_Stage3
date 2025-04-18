@@ -66,6 +66,21 @@ class GeminiRecommendationEngine:
             return ["⚠️ Sistem rekomendasi AI tidak aktif"]
 
         try:
+            response_temperature = requests.get(URL_temperature,headers=headers)
+            response_humidity = requests.get(URL_humidity,headers=headers)
+            response_ultrasonik = requests.get(URL_ultrasonik,headers=headers)
+            response_ldr = requests.get(URL_ldr,headers=headers)
+        
+            temperature_value = float(response_temperature.text)
+            humidity_value = response_humidity.text
+            ultrasonik_value = float(response_ultrasonik.text)
+            ldr_value = response_ldr.text    
+        
+            st.session_state.temperature = temperature_value
+            st.session_state.humidity = humidity_value   
+            st.session_state.ultrasonik = ultrasonik_value  
+            st.session_state.ldr = ldr_value
+            
             prompt = f"""
             Buat 3 rekomendasi spesifik dan singkat untuk menganalisis kondisi lingkungan terhadap kemungkinan terjadinya bencana tanah longsor berdasarkan data berikut: 
             - Suhu: {temperature_value} °C
