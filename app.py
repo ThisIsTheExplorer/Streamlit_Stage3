@@ -7,10 +7,10 @@ import google.generativeai as genai
 import time
 import re
 
-temperature_value = 0
-humidity_value = 0      
-ultrasonik_value = 0
-ldr_value = 0
+#temperature_value = 0
+#humidity_value = 0      
+#ultrasonik_value = 0
+#ldr_value = 0
 
 URL_temperature = "https://industrial.ubidots.com/api/v1.6/devices/esp32/suhu/lv"
 URL_humidity = "https://industrial.ubidots.com/api/v1.6/devices/esp32/kelembaban/lv"
