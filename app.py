@@ -44,6 +44,7 @@ class GeminiRecommendationEngine:
             self.enabled = False
 
     def generate_recommendations(self):
+        proses()
         if not self.enabled:
             return ["⚠️ Sistem rekomendasi AI tidak aktif"]
 
@@ -67,6 +68,21 @@ class GeminiRecommendationEngine:
         return parts[:3] if parts else ["⚠️ Tidak ada data yang bisa ditampilkan"]
 
 # ========== DASHBOARD ==========
+def proses():
+    response_temperature = requests.get(URL_temperature,headers=headers)
+    response_humidity = requests.get(URL_humidity,headers=headers)
+    response_ultrasonik = requests.get(URL_ultrasonik,headers=headers)
+    response_ldr = requests.get(URL_ldr,headers=headers)
+
+    temperature_value = float(response_temperature.text)
+    humidity_value = response_humidity.text
+    ultrasonik_value = float(response_ultrasonik.text)
+    ldr_value = response_ldr.text    
+
+    st.session_state.temperature = temperature_value
+    st.session_state.humidity = humidity_value   
+    st.session_state.ultrasonik = ultrasonik_value  
+    st.session_state.ldr = ldr_value
 def main():
     st.title("🏫 Geo DETEKSI by: The Explorer")
     engine = GeminiRecommendationEngine()
@@ -82,20 +98,7 @@ def main():
     if "llm" not in st.session_state:   
         st.session_state.llm = ""
 
-    response_temperature = requests.get(URL_temperature,headers=headers)
-    response_humidity = requests.get(URL_humidity,headers=headers)
-    response_ultrasonik = requests.get(URL_ultrasonik,headers=headers)
-    response_ldr = requests.get(URL_ldr,headers=headers)
-
-    temperature_value = float(response_temperature.text)
-    humidity_value = response_humidity.text
-    ultrasonik_value = float(response_ultrasonik.text)
-    ldr_value = response_ldr.text    
-
-    st.session_state.temperature = temperature_value
-    st.session_state.humidity = humidity_value   
-    st.session_state.ultrasonik = ultrasonik_value  
-    st.session_state.ldr = ldr_value       
+    proses()       
 
     #st.markdown("Temperature: " + str(temperature_value))
 
